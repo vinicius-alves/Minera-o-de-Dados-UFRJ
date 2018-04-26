@@ -1,1 +1,1 @@
-# Minera-o-de-Dados-UFRJ
+# Mineração-de-Dados-UFRJ
