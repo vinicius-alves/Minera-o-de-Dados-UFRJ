@@ -37,8 +37,7 @@ def ponto_corretamente_classificado(ponto_X, ponto_Y):
 for i in range(num_pontos):
 
 	if(not(ponto_corretamente_classificado(matrix_X.A[i],matrix_Y.A[i]))):
-		#matrix_W[i] += matrix_Y[i]*matrix_X[i]
-		print "b"
+		matrix_W[i] += matrix_Y[i]*matrix_X[i]
 
 	print matrix_W
 
