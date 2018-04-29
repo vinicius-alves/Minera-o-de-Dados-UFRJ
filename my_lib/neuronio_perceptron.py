@@ -13,6 +13,7 @@ class NeuronioPerceptron:
 		self._tol = tol
 		self._random_state = random_state
 		self._len_features = None
+		self.coef_ = None
 
 
 	def fit(self, X, y,input_size):
@@ -24,38 +25,35 @@ class NeuronioPerceptron:
 		self._b = np.random.random_sample()
 		
 		for i in range(self._input_size):
-			y_previsto = np.dot(self._weights,X[i]) + self._b 
+			Z = np.dot(self._weights,X[i]) + self._b 
+			activation_value = self.activation_function(Z)
 
-			if( (y_previsto<=0 and y[i]) or (y_previsto>0 and not(y[i])) ):
+			if( not(activation_value) and y[i]) or (activation_value and not(y[i]) ):
 				#ponto não corretamente classificado
 				valor_desejado = 1 if y[i] else -1
-				erro = np.abs( np.sign(y_previsto) - valor_desejado )
+				erro = np.abs( np.sign(Z) - valor_desejado )
 				#variacao_w = self._lr*erro*x[i]
 				self._weights += self._lr*erro#*X
 				self._b += self._lr*erro
 
-		print (self._weights)
-
-
+		self.coef_ = self._weights
 
 
 	def predict(self,X, output_size):
 		self._output_size = output_size
-		#prevê uma saída
-		self.predict_dist_hiperplano(X, self._output_size)
-		return []
+		Z = np.dot(self._weights,X.transpose()) + self._b
+		return self.activation_function(Z)
+
 
 	def predict_dist_hiperplano(self,X, output_size):
 		self._output_size = output_size
+		return self.dist_hiperplano(X)
 
-		for i in range(self._output_size):
-			print("")
-
-
-		#prevê uma saída
-		return []
+	def dist_hiperplano(self,ponto):
+		dividendo = np.abs(np.dot(self._weights,ponto) + self._b)
+		divisor   = np.sqrt(np.sum(np.power(self._weights,2)))
+		return dividendo / divisor
 
 	def activation_function(self,Z):
-		#mágica
-		print ("")
+		return Z>0
 		

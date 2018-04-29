@@ -24,7 +24,7 @@ class Perceptron:
 
 		neuronio = None
 		y_mapeado = None
-		for i in range(1):#len(self._classes)):
+		for i in range(len(self._classes)):
 			neuronio = NeuronioPerceptron(learning_rate = self._lr, 
 				tol = self._tol, random_state = self._random_state)
 			y_mapeado = y == self._classes[i]
@@ -32,17 +32,24 @@ class Perceptron:
 			self._neuronios.append(neuronio)
 
 
-
-
 	def predict(self,X):
 		self._output_size = len(X)
 
-		for i in range(1):#len(self._classes)):
+		list_dis_hiperplano_neuronio = []
+		self._weights = []
+
+		for i in range(len(self._classes)):
 			neuronio = self._neuronios[i]
-			neuronio.predict(X,self._output_size)
+			list_neu = neuronio.predict_dist_hiperplano(X.transpose(),self._output_size)
+			list_dis_hiperplano_neuronio.append(list_neu)
+			self._weights.append(neuronio.coef_)
 
+		self.coef_ = np.array(self._weights)
 
-		#prevê uma saída
-		return []
+		array_dist = np.transpose(np.array(list_dis_hiperplano_neuronio))
+		array_indice_classes_previstas = np.argmax(array_dist, axis = 1)
+		array_classes_previstas = self._classes[array_indice_classes_previstas]
+
+		return array_classes_previstas
 
 	

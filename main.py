@@ -27,9 +27,9 @@ clf.fit(X_train,y_train)
 #utilizando o modelo
 y_hat = clf.predict(X_test)
 
-#acc = accuracy_score(y_test,y_hat)
+acc = accuracy_score(y_test,y_hat)
 
-#print("\nACC: ",acc)
+print("\nACC: ",acc,"\n")
 
 
 '''
