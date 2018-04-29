@@ -11,7 +11,6 @@ class Perceptron:
 		self._output_size = 0
 		self._lr = learning_rate
 		self._tol = tol
-		self._random_state = random_state
 		self._neuronios = None
 		self._classes = None
 		self.coef_ = None 

@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+from sklearn.metrics import accuracy_score
 
 class NeuronioPerceptron:
 	
-	def __init__(self, learning_rate = 0.1, tol = 0.01, random_state):
+	def __init__(self, learning_rate = 0.1, tol = 0.01, random_state = 0):
 		self._weights = None
 		self._b = None
 		self._input_size = 0
@@ -24,17 +25,27 @@ class NeuronioPerceptron:
 		self._weights = np.random.random_sample((self._len_features,))
 		self._b = np.random.random_sample()
 		
-		for i in range(self._input_size):
-			Z = np.dot(self._weights,X[i]) + self._b 
-			activation_value = self.activation_function(Z)
+		acc = -np.inf
 
-			if( not(activation_value) and y[i]) or (activation_value and not(y[i]) ):
-				#ponto não corretamente classificado
-				valor_desejado = 1 if y[i] else -1
-				erro = np.abs( np.sign(Z) - valor_desejado )
-				#variacao_w = self._lr*erro*x[i]
-				self._weights += self._lr*erro#*X
-				self._b += self._lr*erro
+		while(acc<0.5):
+
+			for i in range(self._input_size):
+				Z = np.dot(self._weights,X[i]) + self._b 
+				activation_value = self.activation_function(Z)
+
+				if( not(activation_value) and y[i]) or (activation_value and not(y[i]) ):
+					#ponto não corretamente classificado
+					valor_desejado = 1 if y[i] else -1
+					erro = np.abs( np.sign(Z) - valor_desejado )
+					#variacao_w = self._lr*erro*x[i]
+					print(np.transpose(X[i]))
+					self._weights += self._lr*erro*np.transpose(X[i])
+					self._b += self._lr*erro
+					#print(self._weights)
+
+			valor_previsto = self.activation_function(np.dot(self._weights,np.transpose(X)) + self._b) 
+			acc = accuracy_score(y,valor_previsto)
+			print(acc)
 
 		self.coef_ = self._weights
 
