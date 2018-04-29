@@ -16,7 +16,7 @@ class Perceptron:
 		self.coef_ = None 
 
 		if(random_state == -np.inf):
-			self._random_state = np.random.random_sample()
+			self._random_state = np.random.randint(1000)
 		else:
 			self._random_state = random_state
 

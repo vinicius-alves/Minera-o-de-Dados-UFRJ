@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 
 import numpy as np
@@ -16,6 +15,9 @@ X = iris.data
 y = iris.target
 target_names = iris.target_names
 
+'''
+DEBUG
+
 random_state = 0
 
 X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.33, random_state = random_state)
@@ -32,11 +34,35 @@ y_hat = clf.predict(X_test)
 acc = accuracy_score(y_test,y_hat)
 
 print("\nACC: ",acc,"\n")
-
+'''
 
 '''
-scikit
-W = [[  1.5   2.5  -4.9  -2.3][  2.8 -19.9   8.3  -5.7][-17.  -15.1  25.6  19.1]] 
-
+NOT DEBUG
 '''
+acc_list =[]
+
+for i in range(2000):
+
+	X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.33)
+
+	#criando o Classificador
+	clf = Perceptron()
+
+	#treinando
+	clf.fit(X_train,y_train)
+
+	#utilizando o modelo
+	y_hat = clf.predict(X_test)
+
+	#índice de acertos
+	acc = accuracy_score(y_test,y_hat)
+	acc_list.append(acc)
+
+#print(acc_list)
+
+print("\n","ACC MEAN: ","%.3f" % np.mean(acc_list))
+print("ACC STD:  ","%.3f" % np.std(acc_list),"\n")
+
+plt.hist(acc_list,bins =30)
+plt.show()
 
