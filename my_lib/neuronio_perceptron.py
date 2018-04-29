@@ -25,9 +25,10 @@ class NeuronioPerceptron:
 		self._weights = np.random.random_sample((self._len_features,))
 		self._b = np.random.random_sample()
 		
-		acc = 0
+		erro_percentual = np.inf
+		acc0 = 0
 
-		while(acc<0.7):
+		while(erro_percentual>self._tol):
 
 			for i in range(self._input_size):
 				Z = np.dot(self._weights,X[i]) + self._b 
@@ -42,12 +43,17 @@ class NeuronioPerceptron:
 					self._weights -= self._lr*erro*np.transpose(X[i])
 					self._b -= self._lr*erro
 
-			valor_previsto = self.activation_function(np.dot(self._weights,np.transpose(X)) + self._b) 
-			acc = accuracy_score(y,valor_previsto)
-		print(acc)
-		print("weights = ",self._weights)
+			arr_valor_previsto = self.activation_function(np.dot(self._weights,np.transpose(X)) + self._b)
+			acc1 = accuracy_score(y_true = y, y_pred =arr_valor_previsto, normalize = False)/self._input_size
+			
+			erro_percentual = np.abs(acc0 - acc1)/acc0
+			#print("erro_percentual = ",erro_percentual)
+			acc0 = acc1
 
+		print("wights: ",self._weights)
+		print("acc1: ", acc1)
 		self.coef_ = self._weights
+
 
 
 	def predict(self,X, output_size):
