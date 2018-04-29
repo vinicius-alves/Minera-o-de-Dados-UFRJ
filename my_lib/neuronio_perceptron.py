@@ -4,7 +4,7 @@ import numpy as np
 
 class NeuronioPerceptron:
 	
-	def __init__(self, learning_rate = 0.1, tol = 0.01, random_state = 0):
+	def __init__(self, learning_rate = 0.1, tol = 0.01, random_state):
 		self._weights = None
 		self._b = None
 		self._input_size = 0
