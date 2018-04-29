@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from sklearn import datasets
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
+#from sklearn.linear_model import Perceptron
 from my_lib import *
 
 #carregando os dados
@@ -26,27 +27,14 @@ clf.fit(X_train,y_train)
 #utilizando o modelo
 y_hat = clf.predict(X_test)
 
-acc = accuracy_score(y_test,y_hat)
+#acc = accuracy_score(y_test,y_hat)
 
-print("ACC: ",acc)
+#print("\nACC: ",acc)
 
 
 '''
 
-matrix_X_linhas = [[1,2,3],
-				   [1,2,3]]
-
-matrix_Y_linhas = [2,3,0]
-
-for linha in matrix_X_linhas:
-	linha.append(1) # para w0
-
-matrix_X = np.matrix(matrix_X_linhas)
-
-matrix_Y = np.matrix(matrix_Y_linhas).T
-
-num_pontos = matrix_X.shape[0]
-num_features = matrix_X.shape[1]
+W = [[  1.5   2.5  -4.9  -2.3][  2.8 -19.9   8.3  -5.7][-17.  -15.1  25.6  19.1]] 
 
 '''
 
