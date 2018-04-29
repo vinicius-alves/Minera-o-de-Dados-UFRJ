@@ -13,28 +13,35 @@ class Perceptron:
 		self._tol = tol
 		self._random_state = random_state
 		self._neuronios = None
+		self._classes = None
 		self.coef_ = None 
 
 
 	def fit(self, X, y):
-		classes = np.unique(y)
-
-		#print (classes)
-
+		self._classes = np.unique(y)
+		self._input_size = len(X)
 		self._neuronios = []
 
 		neuronio = None
-		for i in range(len(classes)):
-			neuronio = NeuronioPerceptron(learning_rate = self._lr, tol = self._tol, random_state = self._random_state)
-			neuronio.fit(X,y)
+		y_mapeado = None
+		for i in range(1):#len(self._classes)):
+			neuronio = NeuronioPerceptron(learning_rate = self._lr, 
+				tol = self._tol, random_state = self._random_state)
+			y_mapeado = y == self._classes[i]
+			neuronio.fit(X,y_mapeado, self._input_size)
 			self._neuronios.append(neuronio)
 
 
-		#aprendizado
-		print ("")
 
 
 	def predict(self,X):
+		self._output_size = len(X)
+
+		for i in range(1):#len(self._classes)):
+			neuronio = self._neuronios[i]
+			neuronio.predict(X,self._output_size)
+
+
 		#prevê uma saída
 		return []
 
