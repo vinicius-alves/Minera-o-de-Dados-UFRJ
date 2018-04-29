@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from sklearn import datasets
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import MinMaxScaler
 from my_lib import Perceptron
 
 #carregando os dados
@@ -21,6 +22,12 @@ for i in range(2000):
 
 	#divindo os dados
 	X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.33)
+
+	#normalizando os dados
+	scaler = MinMaxScaler()
+	scaler.fit(X_train)
+	X_train = scaler.transform(X_train)
+	X_test  = scaler.transform(X_test)
 
 	#criando o Classificador
 	clf = Perceptron()
