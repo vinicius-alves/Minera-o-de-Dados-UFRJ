@@ -25,9 +25,9 @@ class NeuronioPerceptron:
 		self._weights = np.random.random_sample((self._len_features,))
 		self._b = np.random.random_sample()
 		
-		acc = -np.inf
+		acc = 0
 
-		while(acc<0.5):
+		while(acc<0.7):
 
 			for i in range(self._input_size):
 				Z = np.dot(self._weights,X[i]) + self._b 
@@ -36,16 +36,16 @@ class NeuronioPerceptron:
 				if( not(activation_value) and y[i]) or (activation_value and not(y[i]) ):
 					#ponto não corretamente classificado
 					valor_desejado = 1 if y[i] else -1
-					erro = np.abs( np.sign(Z) - valor_desejado )
+					erro = np.sign(Z) - valor_desejado 
 					#variacao_w = self._lr*erro*x[i]
-					print(np.transpose(X[i]))
-					self._weights += self._lr*erro*np.transpose(X[i])
-					self._b += self._lr*erro
-					#print(self._weights)
+					#print("X["+str(i)+"] = ",X[i])
+					self._weights -= self._lr*erro*np.transpose(X[i])
+					self._b -= self._lr*erro
 
 			valor_previsto = self.activation_function(np.dot(self._weights,np.transpose(X)) + self._b) 
 			acc = accuracy_score(y,valor_previsto)
-			print(acc)
+		print(acc)
+		print("weights = ",self._weights)
 
 		self.coef_ = self._weights
 
