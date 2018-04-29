@@ -26,7 +26,7 @@ class NeuronioPerceptron:
 		self._b = np.random.random_sample()
 		
 		erro_percentual = np.inf
-		acc0 = 0
+		acc0 = 1
 
 		while(erro_percentual>self._tol):
 
@@ -36,7 +36,7 @@ class NeuronioPerceptron:
 
 				if( not(activation_value) and y[i]) or (activation_value and not(y[i]) ):
 					#ponto não corretamente classificado
-					valor_desejado = 1 if y[i] else -1
+					valor_desejado = 0.1 if y[i] else -0.1
 					erro = np.sign(Z) - valor_desejado 
 					self._weights -= self._lr*erro*np.transpose(X[i])
 					self._b -= self._lr*erro

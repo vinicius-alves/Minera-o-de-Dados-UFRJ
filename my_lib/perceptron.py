@@ -5,7 +5,7 @@ from .neuronio_perceptron import *
 
 class Perceptron:
 	
-	def __init__(self, learning_rate = 0.1, tol = 0.01, random_state = -1):
+	def __init__(self, learning_rate = 0.1, tol = 0.01, random_state = -np.inf):
 		self._weights = None
 		self._input_size = 0
 		self._output_size = 0
@@ -15,7 +15,7 @@ class Perceptron:
 		self._classes = None
 		self.coef_ = None 
 
-		if(random_state == -1):
+		if(random_state == -np.inf):
 			self._random_state = np.random.random_sample()
 		else:
 			self._random_state = random_state

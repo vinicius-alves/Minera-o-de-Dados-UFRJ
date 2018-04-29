@@ -16,7 +16,7 @@ X = iris.data
 y = iris.target
 target_names = iris.target_names
 
-random_state = 2
+random_state = 0
 
 X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.33, random_state = random_state)
 
