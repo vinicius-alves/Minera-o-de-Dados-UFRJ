@@ -16,7 +16,7 @@ class Perceptron:
 		self.coef_ = None 
 
 		if(random_state == -np.inf):
-			self._random_state = np.random.randint(1000)
+			self._random_state = np.random.randint(10000)
 		else:
 			self._random_state = random_state
 
@@ -51,11 +51,8 @@ class Perceptron:
 		self.coef_ = np.array(self._weights)
 
 		array_dist = np.transpose(np.array(list_dis_hiperplano_neuronio))
-		#print ("\n\n",array_dist)
 		array_indice_classes_previstas = np.argmax(array_dist, axis = 1)
-		#print ("\n\n",array_indice_classes_previstas)
 		array_classes_previstas = self._classes[array_indice_classes_previstas]
 
 		return array_classes_previstas
-
 	

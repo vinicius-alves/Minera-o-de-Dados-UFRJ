@@ -47,10 +47,7 @@ class NeuronioPerceptron:
 			erro_percentual = np.abs(acc0 - acc1)/acc0
 			acc0 = acc1
 
-		#print("weights: ",self._weights)
-		#print("acc1: ", acc1)
 		self.coef_ = self._weights
-
 
 
 	def predict(self,X, output_size):
