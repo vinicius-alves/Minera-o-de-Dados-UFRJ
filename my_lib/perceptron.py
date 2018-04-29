@@ -42,7 +42,7 @@ class Perceptron:
 		list_dis_hiperplano_neuronio = []
 		self._weights = []
 
-		for i in range(len(self._classes)):
+		for i in range(len(self._neuronios)):
 			neuronio = self._neuronios[i]
 			list_neu = neuronio.predict_dist_hiperplano(X.transpose(),self._output_size)
 			list_dis_hiperplano_neuronio.append(list_neu)
@@ -51,7 +51,9 @@ class Perceptron:
 		self.coef_ = np.array(self._weights)
 
 		array_dist = np.transpose(np.array(list_dis_hiperplano_neuronio))
+		#print ("\n\n",array_dist)
 		array_indice_classes_previstas = np.argmax(array_dist, axis = 1)
+		#print ("\n\n",array_indice_classes_previstas)
 		array_classes_previstas = self._classes[array_indice_classes_previstas]
 
 		return array_classes_previstas

@@ -16,7 +16,7 @@ X = iris.data
 y = iris.target
 target_names = iris.target_names
 
-random_state = 0
+random_state = 2
 
 X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.33, random_state = random_state)
 
@@ -29,15 +29,13 @@ clf.fit(X_train,y_train)
 #utilizando o modelo
 y_hat = clf.predict(X_test)
 
-print (y_hat)
-
 acc = accuracy_score(y_test,y_hat)
 
 print("\nACC: ",acc,"\n")
 
 
 '''
-
+scikit
 W = [[  1.5   2.5  -4.9  -2.3][  2.8 -19.9   8.3  -5.7][-17.  -15.1  25.6  19.1]] 
 
 '''

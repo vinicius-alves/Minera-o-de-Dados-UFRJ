@@ -38,8 +38,6 @@ class NeuronioPerceptron:
 					#ponto não corretamente classificado
 					valor_desejado = 1 if y[i] else -1
 					erro = np.sign(Z) - valor_desejado 
-					#variacao_w = self._lr*erro*x[i]
-					#print("X["+str(i)+"] = ",X[i])
 					self._weights -= self._lr*erro*np.transpose(X[i])
 					self._b -= self._lr*erro
 
@@ -47,11 +45,10 @@ class NeuronioPerceptron:
 			acc1 = accuracy_score(y_true = y, y_pred =arr_valor_previsto, normalize = False)/self._input_size
 			
 			erro_percentual = np.abs(acc0 - acc1)/acc0
-			#print("erro_percentual = ",erro_percentual)
 			acc0 = acc1
 
-		print("wights: ",self._weights)
-		print("acc1: ", acc1)
+		#print("weights: ",self._weights)
+		#print("acc1: ", acc1)
 		self.coef_ = self._weights
 
 
@@ -67,7 +64,8 @@ class NeuronioPerceptron:
 		return self.dist_hiperplano(X)
 
 	def dist_hiperplano(self,ponto):
-		dividendo = np.abs(np.dot(self._weights,ponto) + self._b)
+		#sem abs, para manter sinal do produto escalar
+		dividendo = np.dot(self._weights,ponto) + self._b
 		divisor   = np.sqrt(np.sum(np.power(self._weights,2)))
 		return dividendo / divisor
 
